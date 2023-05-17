@@ -21,6 +21,7 @@ class Program
         var dbName = configuration.GetSection("API")["DbName"];
         var identityEndpoint = configuration.GetSection("API")["IdentityEndpoint"];
         var apiEndpoint = configuration.GetSection("API")["ApiEndpoint"];
+        var userName = configuration.GetSection("API")["UserName"];
 
         // create an HttpClient instance
         var httpClient = new HttpClient();
@@ -60,7 +61,10 @@ class Program
         // build variables for api call
         var date = DateOnly.Parse("2023-04-18");
         var formattedDate = date.ToString("yyyy-MM-dd");
-        var uri = new Uri($"{apiEndpoint}/GetSchedule/{formattedDate}?dbName={dbName}");
+
+        // sample uris for testing uncomment one to test the call you'd like to make
+        //var uri = new Uri($"{apiEndpoint}/GetSchedule/{formattedDate}?dbName={dbName}");
+        var uri = new Uri($"{apiEndpoint}/UserEncounterList/{userName}?dbName={dbName}");
 
         // make api call
         var response = await apiClient.GetAsync(uri);
